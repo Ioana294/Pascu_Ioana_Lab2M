@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Pascu_Ioana_Lab2.Data;
 using Microsoft.EntityFrameworkCore;
+using Pascu_Ioana_Lab2.Hubs;
 
 namespace Pascu_Ioana_Lab2
 {
@@ -27,6 +28,7 @@ namespace Pascu_Ioana_Lab2
         {
             services.AddControllersWithViews();
             services.AddDbContext<LibraryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +56,7 @@ namespace Pascu_Ioana_Lab2
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapHub<ChatHub>("/chathub");
             });
         }
     }
