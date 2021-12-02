@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Pascu_Ioana_Lab2.Data;
 using Pascu_Ioana_Lab2.Models;
 using Pascu_Ioana_Lab2.Models.LibraryViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Pascu_Ioana_Lab2.Controllers
 {
+    [Authorize(Policy = "OnlySales")]
     public class PublishersController : Controller
     {
         private readonly LibraryContext _context;
